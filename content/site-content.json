@@ -1,0 +1,162 @@
+{
+  "business": {
+    "name": "Shree Ganesha Solar",
+    "legalName": "Shree Ganesha Solar Systems",
+    "partnerStatus": "Authorized Waaree Energies Partner",
+    "city": "Pune",
+    "state": "Maharashtra",
+    "country": "India",
+    "serviceAreas": [
+      "Pune",
+      "Pimpri-Chinchwad",
+      "Kothrud",
+      "Sinhagad Road",
+      "Baner",
+      "Wakad",
+      "Hinjawadi",
+      "Wagholi",
+      "Hadapsar",
+      "Bhosari",
+      "Chakan"
+    ],
+    "phones": [
+      "+919881054321",
+      "+919822012345"
+    ],
+    "phonesDisplay": [
+      "+91 98810 54321",
+      "+91 98220 12345"
+    ],
+    "whatsapp": "+919881054321",
+    "email": "contact@shreeganeshasolar.com",
+    "offices": [
+      {
+        "name": "Sinhagad Road Branch",
+        "address": "Anand Nagar, Sinhagad Road, Pune, Maharashtra 411051"
+      },
+      {
+        "name": "Kothrud Branch",
+        "address": "Paud Road, Kothrud, Pune, Maharashtra 411038"
+      }
+    ],
+    "workingHours": "Monday to Saturday, 9:30 AM to 7:00 PM IST",
+    "accreditations": [
+      "Authorized Waaree Energies Partner",
+      "MSEDCL Empanelled Rooftop Solar Vendor",
+      "PM Surya Ghar Muft Bijli Yojana Registered Channel Partner"
+    ]
+  },
+  "calculator": {
+    "sunHoursPerDayPune": 4.15,
+    "generationUnitsPerKwMonth": 125,
+    "roofAreaPerKwSqFt": 85,
+    "tariffs": {
+      "residential": 8.50,
+      "society": 9.20,
+      "commercial": 11.50
+    },
+    "subsidies": {
+      "residential1kW": 30000,
+      "residential2kW": 60000,
+      "residential3kWAndAbove": 78000,
+      "societyMaxPerKw": 18000
+    },
+    "disclaimer": "Estimates based on current PM Surya Ghar guidelines and average Pune solar insolation. Actual generation and savings depend on rooftop tilt, shadow factors, sanctioned electrical load, and official MSEDCL approval."
+  },
+  "solutions": [
+    {
+      "id": "homes",
+      "tab": "Homes",
+      "title": "For your home",
+      "subtitle": "Residential Bungalows, Row Houses & Independent Rooftops",
+      "description": "Cut household electricity bills, run ACs during peak summer afternoons worry-free, and claim up to ₹78,000 in direct central subsidy.",
+      "image": "images/residential-solar-pune.jpg",
+      "badge": "PM Surya Ghar Eligible",
+      "benefits": [
+        "Cut monthly electricity bills by up to 90%",
+        "Up to ₹78,000 central subsidy under PM Surya Ghar",
+        "Elevated structures that keep your terrace usable"
+      ]
+    },
+    {
+      "id": "societies",
+      "tab": "Housing societies",
+      "title": "For housing societies",
+      "subtitle": "Co-operative Housing Societies & Apartment Complexes",
+      "description": "Power common amenities including elevators, water lifting pumps, basement lighting, and clubhouses to slash monthly maintenance collections.",
+      "image": "images/society-solar-pune.jpg",
+      "badge": "Central Subsidy Available",
+      "benefits": [
+        "Slash common area electricity bills by up to 85%",
+        "Subsidies available up to 500 kW capacity",
+        "Robust structural load analysis for high-rise buildings"
+      ]
+    },
+    {
+      "id": "businesses",
+      "tab": "Businesses",
+      "title": "For commercial operations",
+      "subtitle": "MSMEs, Warehouses, Schools, Hospitals & Workshops",
+      "description": "High-capacity rooftop installations for factories, warehouses, schools, and hospitals with accelerated depreciation tax benefits.",
+      "image": "images/commercial-solar-pune.jpg",
+      "badge": "40% Tax Depreciation",
+      "benefits": [
+        "Massive daytime power cost reduction for high-tariff units",
+        "40% accelerated depreciation tax savings in year one",
+        "Custom non-penetrating clamping for metal sheds"
+      ]
+    }
+  ],
+  "steps": [
+    {
+      "number": 1,
+      "title": "Free site assessment",
+      "description": "Our engineer inspects your roof, shadow patterns, and electricity load."
+    },
+    {
+      "number": 2,
+      "title": "Custom proposal & design",
+      "description": "Receive a 3D layout, generation estimate, and transparent quotation."
+    },
+    {
+      "number": 3,
+      "title": "Installation & net meter",
+      "description": "Certified technicians install modules and handle all MSEDCL documentation."
+    },
+    {
+      "number": 4,
+      "title": "Switch on & save",
+      "description": "Your bi-directional meter is activated and your power savings start immediately."
+    }
+  ],
+  "faq": [
+    {
+      "question": "How much can I save on my electricity bill?",
+      "answer": "Most homeowners reduce their electricity bills by 80% to 90%. By generating your own power during the day and banking excess units with MSEDCL via net metering, you only pay the minimum fixed connection charges."
+    },
+    {
+      "question": "How does the PM Surya Ghar subsidy work?",
+      "answer": "Under the central government's PM Surya Ghar Muft Bijli Yojana, residential systems receive up to ₹78,000 direct bank transfer (DBT). We register your system on the national portal and submit all documentation."
+    },
+    {
+      "question": "How much roof space do I need?",
+      "answer": "A typical 3 kW solar system requires approximately 250 to 300 square feet of shadow-free rooftop area. We design custom elevated structures so your terrace remains completely usable below."
+    },
+    {
+      "question": "Will solar work during power cuts?",
+      "answer": "Standard grid-tied systems automatically shut off during grid outages for lineman safety. If you need uninterrupted power during load-shedding, we also install hybrid solar systems with smart battery storage."
+    },
+    {
+      "question": "What happens during monsoon or cloudy days?",
+      "answer": "Solar panels convert daylight radiation, not direct heat. On cloudy or rainy days in Pune, systems typically generate 35% to 50% of peak output, and your home seamlessly draws any extra units needed from MSEDCL."
+    },
+    {
+      "question": "How long does the entire installation take?",
+      "answer": "Physical rooftop installation takes 2 to 4 days. The complete cycle including MSEDCL technical sanction, meter testing, and bi-directional net meter commissioning takes about 3 to 4 weeks."
+    },
+    {
+      "question": "What maintenance do the panels require?",
+      "answer": "Solar panels have no moving parts. Simply washing dust off the panels with plain water every 2 to 3 weeks keeps output optimal. All Waaree modules carry a 25-year performance warranty."
+    }
+  ]
+}

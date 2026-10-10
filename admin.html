@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Shree Ganesha Solar Lead Management</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/png" href="images/logo.png">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* Admin Portal Custom Styles */
+    .admin-body {
+      background-color: #F1F5F9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    .admin-nav {
+      background: #0E223D;
+      color: #FFFFFF;
+      padding: 1rem 0;
+      border-bottom: 2px solid #0284C7;
+    }
+    .admin-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+    .admin-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.75rem 0;
+    }
+    .admin-stat-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+    }
+    .admin-stat-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .admin-stat-val {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--color-text-dark);
+    }
+    .admin-controls-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      border: 1px solid var(--color-border);
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .admin-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .admin-filter-btn {
+      padding: 0.45rem 0.9rem;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 600;
+      background: #F8FAFC;
+      border: 1px solid var(--color-border);
+      color: var(--color-text-slate);
+      cursor: pointer;
+      transition: all var(--transition-fast);
+    }
+    .admin-filter-btn.active {
+      background: var(--color-sky-blue);
+      color: #FFFFFF;
+      border-color: var(--color-sky-blue);
+    }
+    .admin-table-card {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-sm);
+      overflow-x: auto;
+    }
+    .admin-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 850px;
+    }
+    .admin-table th, .admin-table td {
+      padding: 1rem 1.15rem;
+      text-align: left;
+      font-size: 13px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .admin-table th {
+      background: #F8FAFC;
+      font-weight: 700;
+      color: var(--color-text-slate);
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.05em;
+    }
+    .admin-table tr:hover {
+      background: #F8FAFC;
+    }
+    .badge-status {
+      display: inline-block;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-full);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .badge-status.new { background: #FEF3C7; color: #D97706; }
+    .badge-status.contacted { background: #E0F2FE; color: #0284C7; }
+    .badge-status.site_visit_scheduled { background: #EDE9FE; color: #7C3AED; }
+    .badge-status.closed_won { background: #DCFCE7; color: #16A34A; }
+    .badge-status.closed_lost { background: #FEE2E2; color: #DC2626; }
+    .admin-action-btn {
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn-action-call { background: #F1F5F9; color: var(--color-text-dark); border: 1px solid var(--color-border); }
+    .btn-action-wa { background: #DCFCE7; color: #15803D; border: 1px solid #BBF7D0; }
+    .admin-login-modal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10, 25, 47, 0.85);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 1rem;
+    }
+    .admin-login-box {
+      background: #FFFFFF;
+      border-radius: var(--radius-lg);
+      padding: 2.25rem;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: var(--shadow-card);
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="admin-body">
+
+  <!-- Admin Login Modal -->
+  <div id="loginModal" class="admin-login-modal">
+    <div class="admin-login-box">
+      <img src="images/logo.png" alt="Shree Ganesha Solar" style="height: 52px; width: 52px; margin-bottom: 0.75rem;">
+      <h2 style="font-size: 1.35rem; font-weight: 800; color: #0E223D; margin-bottom: 0.35rem;">Staff Lead Portal</h2>
+      <p style="font-size: 13px; color: #64748B; margin-bottom: 1.5rem;">Enter administrator access key to review customer quote requests.</p>
+      
+      <form id="adminLoginForm">
+        <div class="form-field" style="margin-bottom: 1rem; text-align: left;">
+          <label for="adminKeyInput" style="font-size: 12px; font-weight: 700;">Secret Access Key</label>
+          <input type="password" id="adminKeyInput" placeholder="Enter access key" required style="padding: 0.75rem; border: 1px solid #CBD5E1; border-radius: 6px; width: 100%;">
+        </div>
+        <div id="loginErrorMsg" style="color: #DC2626; font-size: 12px; font-weight: 600; margin-bottom: 0.75rem; display: none;">
+          Invalid administrator credentials.
+        </div>
+        <button type="submit" class="btn-card-submit" style="width: 100%; padding: 0.75rem;">
+          Authenticate & Enter →
+        </button>
+      </form>
+      <div style="font-size: 11px; color: #94A3B8; margin-top: 1rem;">
+        Default Dev Key: <code>sgs_pune_admin_2026</code>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin Navigation Header -->
+  <header class="admin-nav">
+    <div class="container admin-nav-inner">
+      <div class="admin-brand">
+        <img src="images/logo.png" alt="SGS" style="height: 38px; width: 38px; background: #FFFFFF; border-radius: 50%; padding: 2px;">
+        <span>Shree Ganesha Solar <span style="font-size: 12px; color: #38BDF8; font-weight: 600; margin-left: 6px;">LEAD MANAGEMENT</span></span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <a href="/" target="_blank" style="font-size: 13px; color: #E2E8F0; text-decoration: underline;">View Live Website ↗</a>
+        <button id="logoutBtn" style="font-size: 12px; background: rgba(255,255,255,0.1); color: #FFFFFF; border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer;">
+          Log Out
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Dashboard -->
+  <main class="container" style="padding-top: 1.5rem; padding-bottom: 3rem; flex: 1;">
+    
+    <!-- Real-time Stats Cards -->
+    <div class="admin-stats-grid">
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Total Inquiries</div>
+        <div class="admin-stat-val" id="statTotal">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">New / Action Required</div>
+        <div class="admin-stat-val" style="color: #D97706;" id="statNew">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Visits Scheduled</div>
+        <div class="admin-stat-val" style="color: #7C3AED;" id="statVisits">0</div>
+      </div>
+      <div class="admin-stat-card">
+        <div class="admin-stat-label">Converted / Won</div>
+        <div class="admin-stat-val" style="color: #16A34A;" id="statWon">0</div>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="admin-controls-card">
+      <div class="admin-filter-group" id="statusFilterBar">
+        <button class="admin-filter-btn active" data-status="all">All Leads</button>
+        <button class="admin-filter-btn" data-status="new">New</button>
+        <button class="admin-filter-btn" data-status="contacted">Contacted</button>
+        <button class="admin-filter-btn" data-status="site_visit_scheduled">Visit Scheduled</button>
+        <button class="admin-filter-btn" data-status="closed_won">Closed Won</button>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem; align-items: center;">
+        <input type="text" id="leadSearchInput" placeholder="Search name, phone, area..." style="padding: 0.5rem 0.85rem; border: 1px solid #CBD5E1; border-radius: 6px; font-size: 13px; width: 220px;">
+        <button id="exportCsvBtn" style="padding: 0.5rem 1rem; background: #0E223D; color: #FFFFFF; font-size: 13px; font-weight: 700; border: none; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.35rem;">
+          📥 Export CSV
+        </button>
+      </div>
+    </div>
+
+    <!-- Leads Table -->
+    <div class="admin-table-card">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Lead ID & Date</th>
+            <th>Customer & Contact</th>
+            <th>Property & Monthly Bill</th>
+            <th>Pune Area</th>
+            <th>Source / Attribution</th>
+            <th>Status</th>
+            <th>Quick Actions</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTableBody">
+          <tr>
+            <td colspan="7" style="text-align: center; padding: 2.5rem; color: #64748B;">
+              Loading inquiries...
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <footer style="background: #FFFFFF; border-top: 1px solid #E2E8F0; padding: 1.25rem 0; font-size: 12px; color: #64748B; text-align: center;">
+    Shree Ganesha Solar Systems • Authorized Waaree Energies Partner • Pune & PCMC, Maharashtra
+  </footer>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

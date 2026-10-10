@@ -1,0 +1,1523 @@
+/* ==========================================================================
+   SHREE GANESHA SOLAR - DESIGN SYSTEM & FULL PAGE REFERENCE MATCH
+   Matching the complete layout, typography, colors, and rhythm.
+   ========================================================================== */
+
+:root {
+  --color-primary-navy: #0E223D;
+  --color-dark-navy: #0A192F;
+  --color-secondary-navy: #15325B;
+  --color-solar-orange: #EA580C;
+  --color-solar-orange-hover: #C2410C;
+  --color-sky-blue: #0284C7;
+  --color-sky-light: #38BDF8;
+  --color-border: #E2E8F0;
+  --color-border-input: #CBD5E1;
+  --color-text-dark: #0F172A;
+  --color-text-slate: #334155;
+  --color-text-muted: #64748B;
+  --color-text-light: #94A3B8;
+
+  --bg-page: #F8FAFC;
+  --bg-card: #FFFFFF;
+
+  --font-main: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-marathi: 'Noto Sans Devanagari', 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: 9999px;
+
+  --shadow-card: 0 20px 45px -10px rgba(0, 0, 0, 0.35);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.07);
+
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+}
+
+/* --------------------------------------------------------------------------
+   Reset & Base Styles
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-main);
+  background-color: var(--bg-page);
+  color: var(--color-text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body[lang="mr"], [lang="mr"] {
+  font-family: var(--font-marathi);
+  line-height: 1.65;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-sky-blue);
+  outline-offset: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: -100px;
+  left: 1rem;
+  background: var(--color-primary-navy);
+  color: #FFFFFF;
+  padding: 0.75rem 1.25rem;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+  z-index: 1000;
+  text-decoration: none;
+  transition: top 0.2s ease;
+}
+
+.skip-to-content:focus {
+  top: 1rem;
+  outline: 3px solid var(--color-sky-light);
+}
+
+.honeypot-field {
+  position: absolute !important;
+  left: -9999px !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 3.5vw, 2rem);
+  padding-right: clamp(1rem, 3.5vw, 2rem);
+}
+
+.section-wrapper {
+  padding-top: clamp(3.5rem, 6vw, 5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5rem);
+}
+
+.section-wrapper.bg-white {
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.section-eyebrow {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sky-blue);
+  margin-bottom: 0.6rem;
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.45rem);
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.02em;
+}
+
+.section-subtitle {
+  font-size: 1.05rem;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   1. Clean White Sticky Header
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #FFFFFF;
+  border-bottom: 1px solid var(--color-border);
+  height: 72px;
+  transition: all var(--transition-fast);
+}
+
+.site-header.scrolled {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  height: 64px;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: transform var(--transition-fast);
+}
+
+.brand-logo:hover {
+  transform: scale(1.04);
+}
+
+.logo-symbol {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
+}
+
+.header-nav {
+  display: none;
+  align-items: center;
+  gap: 2.25rem;
+}
+
+@media (min-width: 900px) {
+  .header-nav {
+    display: flex;
+  }
+}
+
+.nav-link {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+  transition: color var(--transition-fast);
+  padding: 0.35rem 0;
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--color-sky-blue);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-lang-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: #475569;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition-fast);
+}
+
+.btn-lang-link:hover {
+  color: var(--color-sky-blue);
+}
+
+.btn-call-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-sky-blue);
+  background-color: #FFFFFF;
+  color: var(--color-sky-blue);
+  font-size: 14px;
+  font-weight: 700;
+  transition: all var(--transition-fast);
+}
+
+.btn-call-pill:hover {
+  background-color: var(--color-sky-blue);
+  color: #FFFFFF;
+  transform: translateY(-1px);
+}
+
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-dark);
+}
+
+@media (min-width: 900px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   2. Hero Section
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  padding-top: clamp(3rem, 5vw, 4.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5rem);
+  background: linear-gradient(125deg, rgba(14, 34, 61, 0.94) 0%, rgba(18, 44, 78, 0.88) 50%, rgba(26, 62, 105, 0.82) 100%),
+              url('../images/hero-solar-pune.jpg') center center / cover no-repeat;
+  color: #FFFFFF;
+  min-height: 610px;
+  display: flex;
+  align-items: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1.15fr 0.88fr;
+  }
+}
+
+.hero-tagline {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sky-light);
+  margin-bottom: 1rem;
+}
+
+.hero-title {
+  font-size: clamp(2.3rem, 4.3vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.14;
+  color: #FFFFFF;
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #E2E8F0;
+  max-width: 530px;
+  margin-bottom: 2rem;
+}
+
+.hero-btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.btn-hero-orange {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--color-solar-orange);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+  transition: all var(--transition-fast);
+}
+
+.btn-hero-orange:hover {
+  background-color: var(--color-solar-orange-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45);
+}
+
+.btn-hero-dark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: rgba(30, 41, 59, 0.85);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-hero-dark:hover {
+  background-color: #334155;
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.hero-disclaimer {
+  font-size: 12px;
+  color: #94A3B8;
+}
+
+/* Floating Lead Card (Exact Match) */
+.hero-card {
+  background-color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+  box-shadow: var(--shadow-card);
+  color: var(--color-text-dark);
+}
+
+.hero-card-tag {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-sky-blue);
+  margin-bottom: 0.35rem;
+}
+
+.hero-card-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.hero-form-full {
+  grid-column: 1 / -1;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-field label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-slate);
+}
+
+.input-with-prefix {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #FFFFFF;
+}
+
+.input-prefix {
+  padding: 0.65rem 0.75rem;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-slate);
+  background-color: #F8FAFC;
+  border-right: 1px solid var(--color-border-input);
+}
+
+.input-with-prefix input {
+  border: none !important;
+  outline: none;
+  padding: 0.65rem 0.75rem;
+  width: 100%;
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-family: inherit;
+}
+
+.form-field input, .form-field select {
+  border: 1px solid var(--color-border-input);
+  border-radius: var(--radius-sm);
+  padding: 0.65rem 0.75rem;
+  font-size: 14px;
+  color: var(--color-text-dark);
+  outline: none;
+  transition: all var(--transition-fast);
+  background-color: #FFFFFF;
+  width: 100%;
+  font-family: inherit;
+}
+
+.form-field input:focus, .form-field select:focus, .input-with-prefix:focus-within {
+  border-color: var(--color-sky-blue);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 12px;
+  color: var(--color-text-slate);
+  margin-top: 0.25rem;
+}
+
+.checkbox-row input[type="checkbox"] {
+  accent-color: var(--color-sky-blue);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.btn-card-submit {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background-color: var(--color-solar-orange);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0.85rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+  transition: all var(--transition-fast);
+  margin-top: 0.65rem;
+}
+
+.btn-card-submit:hover {
+  background-color: var(--color-solar-orange-hover);
+  transform: translateY(-1px);
+}
+
+.card-subnote {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin-top: 0.65rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Key Metrics Ribbon Below Hero
+   -------------------------------------------------------------------------- */
+.metrics-strip {
+  margin-top: -30px;
+  position: relative;
+  z-index: 20;
+  margin-bottom: 2.5rem;
+}
+
+.metrics-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .metrics-strip-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.metric-strip-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+  transition: transform var(--transition-fast);
+}
+
+.metric-strip-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.metric-strip-num {
+  font-size: clamp(1.8rem, 3vw, 2.35rem);
+  font-weight: 900;
+  color: var(--color-text-dark);
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.metric-strip-label {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   4. Why Go Solar (3 Cards)
+   -------------------------------------------------------------------------- */
+.why-solar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 768px) {
+  .why-solar-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.why-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 1.75rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-base);
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-sky-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.why-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(2, 132, 199, 0.1);
+  color: var(--color-sky-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.why-card h3 {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.3;
+}
+
+.why-card p {
+  font-size: 0.92rem;
+  color: var(--color-text-slate);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   5. Savings Calculator (Matching Exact Reference Layout)
+   -------------------------------------------------------------------------- */
+.calculator-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  margin-top: 2rem;
+}
+
+.calc-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.25rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .calc-layout-grid {
+    grid-template-columns: 1fr 1.15fr;
+  }
+}
+
+.slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+.slider-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.slider-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-slate);
+}
+
+.slider-value-display {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: var(--color-text-dark);
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: #E2E8F0;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--color-sky-blue);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+  border: 2px solid #FFFFFF;
+}
+
+.slider-hints {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--color-text-light);
+}
+
+.calc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 500px) {
+  .calc-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.calc-stat-box {
+  background-color: #F8FAFC;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 0.85rem;
+  text-align: left;
+}
+
+.calc-stat-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+  text-transform: uppercase;
+}
+
+.calc-stat-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+}
+
+.calc-btn-row {
+  margin-top: 1.25rem;
+}
+
+.btn-calc-green {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #16A34A;
+  color: #FFFFFF;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn-calc-green:hover {
+  background-color: #15803D;
+  transform: translateY(-1px);
+}
+
+.calc-disclaimer {
+  font-size: 12px;
+  color: var(--color-text-light);
+  margin-top: 1.25rem;
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------------------------------
+   6. Solar Solutions Section (Tabbed 2-Column Layout)
+   -------------------------------------------------------------------------- */
+.solutions-tabs-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.tab-pill-btn {
+  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-slate);
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  transition: all var(--transition-fast);
+}
+
+.tab-pill-btn.active {
+  background-color: var(--color-sky-blue);
+  color: #FFFFFF;
+  border-color: var(--color-sky-blue);
+}
+
+.solution-tab-content {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 900px) {
+  .solution-tab-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.solution-tab-img-box {
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+  background-color: #0E223D;
+}
+
+.solution-tab-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.solution-tab-body {
+  padding: clamp(1.75rem, 4vw, 3rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.solution-tab-body h3 {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 0.85rem;
+}
+
+.solution-tab-body p {
+  font-size: 0.95rem;
+  color: var(--color-text-slate);
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+}
+
+.solution-tab-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.solution-tab-checklist li {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.solution-tab-checklist li svg {
+  color: #16A34A;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   7. How It Works (4 Clear Steps)
+   -------------------------------------------------------------------------- */
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .process-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .process-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.process-step-card {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.process-step-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--color-sky-blue);
+  box-shadow: var(--shadow-md);
+}
+
+.process-step-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--color-sky-blue);
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+
+.process-step-card h3 {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 0.6rem;
+}
+
+.process-step-card p {
+  font-size: 0.88rem;
+  color: var(--color-text-slate);
+  line-height: 1.55;
+}
+
+.process-bottom-banner {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.process-bottom-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text-slate);
+}
+
+/* --------------------------------------------------------------------------
+   8. Government Support & Financing Banner (Dark Navy)
+   -------------------------------------------------------------------------- */
+.financing-banner {
+  background: linear-gradient(135deg, #0A192F 0%, #102A4C 100%);
+  color: #FFFFFF;
+  border-radius: var(--radius-xl);
+  padding: clamp(2rem, 5vw, 3.5rem);
+  box-shadow: var(--shadow-md);
+  margin-top: 2rem;
+}
+
+.financing-banner-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+@media (min-width: 900px) {
+  .financing-banner-grid {
+    grid-template-columns: 1.1fr 1fr;
+  }
+}
+
+.financing-banner h2 {
+  font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 0.85rem;
+}
+
+.financing-banner p {
+  color: #CBD5E1;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.financing-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.financing-checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 15px;
+  font-weight: 600;
+  color: #F8FAFC;
+}
+
+.financing-checklist li svg {
+  color: #38BDF8;
+  flex-shrink: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. Real Projects Showcase
+   -------------------------------------------------------------------------- */
+.project-card-split {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: var(--shadow-sm);
+  margin-top: 2.25rem;
+}
+
+@media (min-width: 900px) {
+  .project-card-split {
+    grid-template-columns: 1fr 1.15fr;
+  }
+}
+
+.project-img-box {
+  width: 100%;
+  height: 100%;
+  min-height: 280px;
+  position: relative;
+  background-color: #0E223D;
+}
+
+.project-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project-body {
+  padding: clamp(1.75rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.project-tag {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-sky-blue);
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.project-body h3 {
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  margin-bottom: 0.85rem;
+}
+
+.project-body p {
+  font-size: 0.92rem;
+  color: var(--color-text-slate);
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.project-stats-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-pill {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background-color: #F0F9FF;
+  color: var(--color-sky-blue);
+  border: 1px solid #BAE6FD;
+}
+
+/* --------------------------------------------------------------------------
+   10. Customer Proof
+   -------------------------------------------------------------------------- */
+.proof-box {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-top: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.proof-quote {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--color-text-dark);
+  line-height: 1.65;
+  margin-bottom: 1rem;
+}
+
+.proof-author {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   11. Comparison Table ("Local accountability at every step")
+   -------------------------------------------------------------------------- */
+.comparison-table-wrapper {
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  background-color: #FFFFFF;
+  margin-top: 2.25rem;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px;
+}
+
+.comparison-table th, .comparison-table td {
+  padding: 1.15rem 1.5rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+  font-size: 14px;
+}
+
+.comparison-table th {
+  background-color: var(--color-primary-navy);
+  color: #FFFFFF;
+  font-weight: 700;
+}
+
+.comparison-table td.col-us {
+  font-weight: 700;
+  color: var(--color-sky-blue);
+  background-color: #F0F9FF;
+}
+
+.comparison-table td.col-others {
+  color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   12. FAQ Section (2-Column Layout)
+   -------------------------------------------------------------------------- */
+.faq-2col-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .faq-2col-grid {
+    grid-template-columns: 0.85fr 1.15fr;
+  }
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  background-color: #FFFFFF;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-fast);
+}
+
+.faq-item.active {
+  border-color: var(--color-sky-blue);
+}
+
+.faq-question-btn {
+  width: 100%;
+  padding: 1.15rem 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text-dark);
+}
+
+.faq-icon-chevron {
+  width: 20px;
+  height: 20px;
+  color: #64748B;
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon-chevron {
+  transform: rotate(180deg);
+  color: var(--color-sky-blue);
+}
+
+.faq-answer-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-base);
+}
+
+.faq-item.active .faq-answer-panel {
+  max-height: 300px;
+}
+
+.faq-answer-content {
+  padding: 0 1.35rem 1.15rem 1.35rem;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-text-slate);
+}
+
+/* --------------------------------------------------------------------------
+   13. Final CTA & Re-Form Section (Dark Navy)
+   -------------------------------------------------------------------------- */
+.final-cta-section {
+  background: linear-gradient(135deg, #0A192F 0%, #102A4C 100%);
+  color: #FFFFFF;
+  padding-top: clamp(3.5rem, 6vw, 5.5rem);
+  padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+}
+
+.final-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .final-cta-grid {
+    grid-template-columns: 1fr 0.9fr;
+  }
+}
+
+.final-cta-content h2 {
+  font-size: clamp(2rem, 3.6vw, 2.85rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.final-cta-content p {
+  color: #CBD5E1;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  margin-bottom: 2rem;
+  max-width: 520px;
+}
+
+.final-cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.btn-cta-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #FFFFFF;
+  color: var(--color-text-dark);
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-cta-white:hover {
+  background-color: #F1F5F9;
+  transform: translateY(-2px);
+}
+
+.btn-cta-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #25D366;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-md);
+  transition: all var(--transition-fast);
+}
+
+.btn-cta-whatsapp:hover {
+  background-color: #1EBE5D;
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   14. Footer
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background-color: #071324;
+  color: #FFFFFF;
+  padding-top: clamp(3.5rem, 6vw, 4.5rem);
+  padding-bottom: clamp(5.5rem, 7vw, 4rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-top-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 640px) {
+  .footer-top-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-top-grid {
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  }
+}
+
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  background: #FFFFFF;
+  border-radius: 50%;
+  padding: 3px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer-brand-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.footer-col-about p {
+  color: #94A3B8;
+  font-size: 0.9rem;
+  margin: 0.75rem 0 1.25rem 0;
+  line-height: 1.6;
+}
+
+.footer-heading {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 1.15rem;
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.footer-links-list a {
+  font-size: 0.9rem;
+  color: #94A3B8;
+  transition: color var(--transition-fast);
+}
+
+.footer-links-list a:hover {
+  color: #38BDF8;
+}
+
+.footer-bottom-bar {
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.8rem;
+  color: #64748B;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom-bar {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+/* Floating WhatsApp & Sticky Mobile Bar */
+.floating-whatsapp-btn {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: #25D366;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 18px rgba(37, 211, 102, 0.45);
+  z-index: 90;
+  transition: transform var(--transition-fast);
+}
+
+@media (min-width: 768px) {
+  .floating-whatsapp-btn {
+    bottom: 25px;
+    right: 25px;
+  }
+}
+
+.floating-whatsapp-btn:hover {
+  transform: scale(1.1);
+}
+
+.mobile-sticky-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--color-border);
+  padding: 0.65rem 1rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 85;
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.08);
+}
+
+@media (min-width: 768px) {
+  .mobile-sticky-action-bar {
+    display: none;
+  }
+}
+
+.mobile-sticky-action-bar .btn-mobile {
+  flex: 1;
+  padding: 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+
+.mobile-sticky-action-bar .btn-call {
+  border: 1.5px solid var(--color-sky-blue);
+  color: var(--color-sky-blue);
+  background: #FFFFFF;
+}
+
+.mobile-sticky-action-bar .btn-quote {
+  background-color: var(--color-solar-orange);
+  color: #FFFFFF;
+  border: none;
+}
