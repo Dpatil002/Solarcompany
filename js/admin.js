@@ -27,6 +27,21 @@ class AdminController {
     const filterButtons = document.querySelectorAll('#statusFilterBar .admin-filter-btn');
     const searchInput = document.getElementById('leadSearchInput');
     const exportBtn = document.getElementById('exportCsvBtn');
+    const liveLink = document.getElementById('viewLiveWebsiteLink');
+
+    // Dynamically adjust 'View Live Website' link so clicking it from admin subdomain navigates to the apex domain
+    if (liveLink) {
+      const currentHost = window.location.hostname;
+      const currentPort = window.location.port ? `:${window.location.port}` : '';
+      const protocol = window.location.protocol;
+      if (currentHost.includes('.')) {
+        // Remove the leading subdomain component (e.g., 'admin.shreeganeshasolar.com' -> 'shreeganeshasolar.com' or 'admin.localhost' -> 'localhost')
+        const apexHost = currentHost.replace(/^[^.]+\./, '');
+        liveLink.href = `${protocol}//${apexHost}${currentPort}/`;
+      } else {
+        liveLink.href = '/';
+      }
+    }
 
     if (loginForm) {
       loginForm.addEventListener('submit', async (e) => {

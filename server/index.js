@@ -17,14 +17,60 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const ADMIN_SECRET = process.env.ADMIN_SECRET_KEY || 'sgs_pune_admin_2026';
 const HASH_SALT = process.env.HASH_SALT || 'sgs_solar_salt_pune';
+const ADMIN_SUBDOMAIN = (process.env.ADMIN_SUBDOMAIN || 'admin').trim().toLowerCase();
+const APP_DOMAIN = (process.env.APP_DOMAIN || '').trim().toLowerCase();
+
+/**
+ * Checks whether the incoming request is directed to the staff admin subdomain.
+ * Supports both local testing (admin.localhost:8080) and production (admin.yourdomain.com).
+ */
+function isAdminHost(req) {
+  const rawHost = (req.headers.host || req.hostname || '').toLowerCase();
+  const host = rawHost.split(':')[0];
+  if (!host) return false;
+  if (host === `${ADMIN_SUBDOMAIN}.localhost`) return true;
+  if (APP_DOMAIN && host === `${ADMIN_SUBDOMAIN}.${APP_DOMAIN}`) return true;
+  if (host.startsWith(`${ADMIN_SUBDOMAIN}.`)) return true;
+  return false;
+}
 
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '100kb' }));
 app.use(express.urlencoded({ extended: true, limit: '100kb' }));
 
-// Static file serving
 const PUBLIC_DIR = path.join(__dirname, '..');
+
+// Subdomain SEO Protection: Never allow web crawlers to index the staff portal
+app.get('/robots.txt', (req, res) => {
+  if (isAdminHost(req)) {
+    res.type('text/plain');
+    return res.send('User-agent: *\nDisallow: /\n');
+  }
+  const robots = `User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin
+Disallow: /data/
+
+Sitemap: https://www.shreeganeshasolar.com/sitemap.xml
+`;
+  res.type('text/plain');
+  res.send(robots);
+});
+
+// Admin Subdomain Root Routing:
+// When requested via the admin subdomain, GET / serves admin.html directly
+app.use((req, res, next) => {
+  if (isAdminHost(req)) {
+    if (req.method === 'GET' && req.path === '/') {
+      return res.sendFile(path.join(PUBLIC_DIR, 'admin.html'));
+    }
+  }
+  next();
+});
+
+// Static file serving (CSS, JS, images, content)
 app.use(express.static(PUBLIC_DIR, {
   maxAge: '1h',
   etag: true
@@ -253,21 +299,8 @@ app.get('/api/health', (req, res) => {
 });
 
 /* --------------------------------------------------------------------------
-   SEO: robots.txt and sitemap.xml
+   SEO: sitemap.xml
    -------------------------------------------------------------------------- */
-app.get('/robots.txt', (req, res) => {
-  const robots = `User-agent: *
-Allow: /
-Disallow: /api/
-Disallow: /admin
-Disallow: /data/
-
-Sitemap: https://www.shreeganeshasolar.com/sitemap.xml
-`;
-  res.type('text/plain');
-  res.send(robots);
-});
-
 app.get('/sitemap.xml', (req, res) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -308,20 +341,51 @@ app.get('/sitemap.xml', (req, res) => {
 });
 
 /* --------------------------------------------------------------------------
-   Admin Dashboard Route
+   Admin Dashboard Route:
+   - On subdomain: Serves admin.html directly
+   - On apex domain: Redirects to the subdomain (or serves admin.html if no subdomain DNS)
    -------------------------------------------------------------------------- */
 app.get('/admin', (req, res) => {
+  const host = (req.headers.host || req.hostname || '').split(':')[0].toLowerCase();
+  const port = (req.headers.host || '').split(':')[1];
+  const portSuffix = port ? `:${port}` : '';
+
+  if (isAdminHost(req)) {
+    return res.sendFile(path.join(PUBLIC_DIR, 'admin.html'));
+  }
+
+  // If visited locally on apex (localhost or 127.0.0.1), redirect to admin.localhost
+  if (host === 'localhost' || host === '127.0.0.1') {
+    return res.redirect(302, `${req.protocol}://${ADMIN_SUBDOMAIN}.localhost${portSuffix}/`);
+  }
+
+  // If in production and APP_DOMAIN is configured, redirect to subdomain
+  if (APP_DOMAIN) {
+    const proto = req.secure || req.headers['x-forwarded-proto'] === 'https' ? 'https' : 'http';
+    return res.redirect(302, `${proto}://${ADMIN_SUBDOMAIN}.${APP_DOMAIN}${portSuffix}/`);
+  }
+
+  // Fallback if accessed directly on apex without domain configuration
   res.sendFile(path.join(PUBLIC_DIR, 'admin.html'));
 });
 
-// Fallback to index.html
+// Fallback routing:
+// - On subdomain: SPA fallback to admin.html
+// - On apex: SPA fallback to index.html
 app.use((req, res) => {
+  if (isAdminHost(req)) {
+    return res.sendFile(path.join(PUBLIC_DIR, 'admin.html'));
+  }
   res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
 // Start Server
 app.listen(PORT, () => {
-  console.log(`[SGS Full-Stack Server] Running on http://localhost:${PORT}`);
-  console.log(`[SGS Full-Stack Server] Admin Portal available at http://localhost:${PORT}/admin`);
+  console.log(`[SGS Full-Stack Server] Server running on port ${PORT}`);
+  console.log(`[SGS Full-Stack Server] Public Website: http://localhost:${PORT}`);
+  console.log(`[SGS Full-Stack Server] Staff Portal Subdomain: http://${ADMIN_SUBDOMAIN}.localhost:${PORT}`);
+  if (APP_DOMAIN) {
+    console.log(`[SGS Full-Stack Server] Production Portal: https://${ADMIN_SUBDOMAIN}.${APP_DOMAIN}`);
+  }
   console.log(`[SGS Full-Stack Server] Database: ${LeadRepository.isSqlite() ? 'Native SQLite' : 'JSON Fallback'}`);
 });

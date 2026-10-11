@@ -88,11 +88,29 @@ The application will launch on **[http://localhost:8080](http://localhost:8080)*
 
 ---
 
-## 💼 Staff Lead Management Portal (`/admin`)
+## 💼 Staff Lead Management Portal (Subdomain Architecture)
 
-Authorized staff can manage inbound solar inquiries at:
-- **URL:** [http://localhost:8080/admin](http://localhost:8080/admin)
-- **Default Development Access Key:** `sgs_pune_admin_2026` *(Change in `.env` for production)*
+Authorized sales and field staff can manage inbound solar inquiries directly on a dedicated subdomain:
+- **Local Development URL:** [http://admin.localhost:8080/](http://admin.localhost:8080/)
+- **Production URL:** `https://admin.shreeganeshasolar.com/` (or your configured `ADMIN_SUBDOMAIN.APP_DOMAIN`)
+- **Default Development Access Key:** `sgs_pune_admin_2026` *(Set via `ADMIN_SECRET_KEY` in `.env` for production)*
+
+### Subdomain DNS & Production Configuration
+1. **DNS CNAME Record:**
+   In your domain registrar / DNS provider (Cloudflare, GoDaddy, Route 53, etc.), create a DNS record:
+   - **Type:** `CNAME`
+   - **Name / Host:** `admin` (or your chosen prefix)
+   - **Target / Value:** `shreeganeshasolar.com` (or your hosting server's primary domain/IP)
+   - **Proxy / TTL:** Auto / Proxied (if using Cloudflare)
+2. **Environment Variables (`.env`):**
+   ```bash
+   ADMIN_SUBDOMAIN=admin
+   APP_DOMAIN=shreeganeshasolar.com
+   ```
+3. **Smart Apex Redirection:**
+   If a team member enters `http://localhost:8080/admin` or `https://shreeganeshasolar.com/admin`, the server automatically redirects them with an HTTP 302 to the official subdomain.
+4. **Search Engine Crawler Protection:**
+   The admin subdomain automatically serves a strict `User-agent: *\nDisallow: /` in `robots.txt` and includes `<meta name="robots" content="noindex, nofollow">` to ensure internal staff records are never indexed by Google.
 
 ### Features:
 1. **Pipeline Dashboard:** View total inquiries, new leads, site visits scheduled, and closed deals in real-time.
@@ -102,6 +120,7 @@ Authorized staff can manage inbound solar inquiries at:
    - Click **💬 Chat** to open WhatsApp with a personalized message referencing the inquiry ID.
    - Click **📝 Notes** to log site survey observations or quotation details.
 4. **CSV Export:** Click **📥 Export CSV** to download customer records for CRM import or weekly sales reviews.
+5. **Direct Site Navigation:** The portal header includes **View Live Website ↗** which dynamically resolves back to the public apex website.
 
 ---
 
