@@ -379,13 +379,17 @@ app.use((req, res) => {
   res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`[SGS Full-Stack Server] Server running on port ${PORT}`);
-  console.log(`[SGS Full-Stack Server] Public Website: http://localhost:${PORT}`);
-  console.log(`[SGS Full-Stack Server] Staff Portal Subdomain: http://${ADMIN_SUBDOMAIN}.localhost:${PORT}`);
-  if (APP_DOMAIN) {
-    console.log(`[SGS Full-Stack Server] Production Portal: https://${ADMIN_SUBDOMAIN}.${APP_DOMAIN}`);
-  }
-  console.log(`[SGS Full-Stack Server] Database: ${LeadRepository.isSqlite() ? 'Native SQLite' : 'JSON Fallback'}`);
-});
+// Start Server if executed directly
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`[SGS Full-Stack Server] Server running on port ${PORT}`);
+    console.log(`[SGS Full-Stack Server] Public Website: http://localhost:${PORT}`);
+    console.log(`[SGS Full-Stack Server] Staff Portal Subdomain: http://${ADMIN_SUBDOMAIN}.localhost:${PORT}`);
+    if (APP_DOMAIN) {
+      console.log(`[SGS Full-Stack Server] Production Portal: https://${ADMIN_SUBDOMAIN}.${APP_DOMAIN}`);
+    }
+    console.log(`[SGS Full-Stack Server] Database: ${LeadRepository.isSqlite() ? 'Native SQLite' : 'JSON Fallback'}`);
+  });
+}
+
+module.exports = app;

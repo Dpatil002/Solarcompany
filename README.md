@@ -95,22 +95,19 @@ Authorized sales and field staff can manage inbound solar inquiries directly on 
 - **Production URL:** `https://admin.shreeganeshasolar.com/` (or your configured `ADMIN_SUBDOMAIN.APP_DOMAIN`)
 - **Default Development Access Key:** `sgs_pune_admin_2026` *(Set via `ADMIN_SECRET_KEY` in `.env` for production)*
 
-### Subdomain DNS & Production Configuration
-1. **DNS CNAME Record:**
-   In your domain registrar / DNS provider (Cloudflare, GoDaddy, Route 53, etc.), create a DNS record:
-   - **Type:** `CNAME`
-   - **Name / Host:** `admin` (or your chosen prefix)
-   - **Target / Value:** `shreeganeshasolar.com` (or your hosting server's primary domain/IP)
-   - **Proxy / TTL:** Auto / Proxied (if using Cloudflare)
-2. **Environment Variables (`.env`):**
-   ```bash
-   ADMIN_SUBDOMAIN=admin
-   APP_DOMAIN=shreeganeshasolar.com
-   ```
-3. **Smart Apex Redirection:**
-   If a team member enters `http://localhost:8080/admin` or `https://shreeganeshasolar.com/admin`, the server automatically redirects them with an HTTP 302 to the official subdomain.
-4. **Search Engine Crawler Protection:**
-   The admin subdomain automatically serves a strict `User-agent: *\nDisallow: /` in `robots.txt` and includes `<meta name="robots" content="noindex, nofollow">` to ensure internal staff records are never indexed by Google.
+### 🚀 Netlify Deployment (`shreesolarcompany.netlify.app`)
+
+If your main site is hosted on Netlify at **[https://shreesolarcompany.netlify.app](https://shreesolarcompany.netlify.app/)**:
+
+1. **How Subdomains Work on Netlify:**
+   - **On free `*.netlify.app` domains:** Netlify's SSL certificates only cover single-level subdomains (`site-name.netlify.app`). Therefore, third-level subdomains like `admin.shreesolarcompany.netlify.app` cannot be issued directly on `netlify.app`.
+   - **Option A (Dedicated Netlify Staff Site):** Create a 2nd site in your Netlify dashboard linked to this same repository and name it **`https://shreesolarcompany-admin.netlify.app`** or **`https://admin-shreesolarcompany.netlify.app`**.
+   - **Option B (Direct Protected Route):** Access the staff portal directly at **`https://shreesolarcompany.netlify.app/admin`** (pre-configured in `netlify.toml` with `X-Robots-Tag: noindex` and protected by your secret access key).
+   - **Option C (Custom Domain - Recommended):** If you connect a custom domain (e.g., `shreesolarcompany.com`), you can add **`admin.shreesolarcompany.com`** as a standard CNAME subdomain in Netlify Domain Management.
+
+2. **Serverless Functions:**
+   - The repository includes pre-configured Netlify Serverless Functions in `netlify/functions/api.js` and `netlify.toml`.
+   - All quote submissions (`POST /api/leads`) and staff queries (`/api/admin/*`) run serverlessly on Netlify without needing external server hosting.
 
 ### Features:
 1. **Pipeline Dashboard:** View total inquiries, new leads, site visits scheduled, and closed deals in real-time.
